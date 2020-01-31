@@ -1,0 +1,37 @@
+.Display {
+  display: flex;
+  flex: 1;
+  margin-top: 4em;
+}
+/* need to solve this, the screen container needs to be equal to the display-cont */
+.Display-container, .Screen-container {
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  flex-basis: 50%;
+  margin: auto;
+  border: blanchedalmond 1px solid;
+  gap: 2px;
+
+}
+
+.Field, .Actbar {
+  margin: 5px;
+}
+.Field {
+  flex: 2;
+  border: green 2px dashed;
+}
+.Field-container {
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+  flex: 1;
+}
+.Player-container {
+  border: dotted 2px orange;
+}
+.Actbar {
+  flex: 1;
+  border: rgb(109, 109, 109) 2px dashed;
+}

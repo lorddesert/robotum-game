@@ -1,0 +1,16 @@
+{
+  "players": [{
+    "player1": {
+      "name": "Nitsuga",
+      "image": "nitsuga.jpg",
+      "attack": "10",
+      "life": "100"
+    },
+    "player2": {
+      "name": "Gnaro",
+      "image": "gnaro.jpg",
+      "attack": "20",
+      "life": "100"
+    }
+  }]
+}

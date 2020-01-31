@@ -1,0 +1,18 @@
+body {
+  font-size: 20px;
+  font-family: "Lato", Arial, Helvetica, sans-serif;
+  background-color: #1d1d1d;
+  color: #FFFF;
+}
+
+a {
+  text-decoration: none !important;
+}
+a:link, a:visited, a:link {
+  color: inherit;
+}
+
+.Field {
+  background: url("./lifemeter-3.png") left bottom no-repeat white;
+  color: black;
+}
