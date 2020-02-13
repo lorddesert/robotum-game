@@ -8,16 +8,16 @@ git:
   depth: 3
 script:
   - yarn build
-  - echo 'cv.arepa.dev' > public/CNAME
+  - echo 'robotum-game' > public/CNAME
 deploy:
-  name: Elmo@gremlim
+  name: sacha.nocetto@hotmail.com
   provider: pages
   skip-cleanup: true
   keep-history: true
   github-token: $GITHUB_TOKEN
   local-dir: dist/
   target-branch: master
-  commit_message: "Elmo@gremlim - Deploy release ${TRAVIS_TAG}"
-  fqdn: cv.arepa.dev
+  commit_message: "sacha.nocetto@hotmail.com - Deploy release ${TRAVIS_TAG}"
+  fqdn: robotum-game
   on:
     branch: develop
