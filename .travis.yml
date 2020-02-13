@@ -8,7 +8,7 @@ git:
   depth: 3
 script:
   - yarn build
-  - echo 'cv.arepa.dev' > public/CNAME
+  - echo 'robotum-game' > public/CNAME
 deploy:
   name: sacha.nocetto@hotmail.com
   provider: pages
