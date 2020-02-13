@@ -1,0 +1,159 @@
+.Display {
+  display: flex;
+  flex: 1;
+  margin-top: 4em;
+}
+/* need to solve this, the screen container needs to be equal to the display-cont */
+.Display-container, .Game-container {
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  flex-basis: 50%;
+  margin: auto;
+  border: blanchedalmond 1px solid;
+  gap: 2px;
+
+}
+
+.Field, .Actbar {
+  margin: 5px;
+}
+.Field {
+  flex: 2;
+}
+.Field-container {
+  display: grid;
+  background: url("./images/background.jpg") bottom;
+  gap: 5px;
+  grid-template-columns: repeat(16, 1fr);
+  /* grid-template-rows: repeat(18, 1fr); */
+  height: 100%;
+  flex: 1;
+}
+.Player-1, .Player-2 {
+  display: flex;
+}
+.Player-1 {
+  grid-column: 1/4;
+  grid-row: 2/3;
+}
+.Player-2 {
+  grid-column: 14/17;
+
+}
+.Player-1-container, .Player-2-container {
+  flex: 1;
+}
+.Player-1-container {
+  background: url("./images/cara.png") no-repeat center;
+}
+.Player-2-container {
+  background: url("./images/gnaro.png") no-repeat;
+}
+.Actbar {
+  padding: 5px;
+  flex: 1;
+  display: flex;
+  border: #713e5a 5px solid;
+  background: #efefef;
+  color: black;
+}
+.Actbar-container {
+  flex: 1;
+  display: flex;
+}
+.Message {
+  flex: 3;
+  
+}
+.Actions {
+  flex: 2;
+  background: #e9e3e6;
+  border: 5px solid #713e5a;
+  border-radius: 7px;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+}
+.Action {
+  margin: 5px;
+
+}
+.Action-name {
+  padding-left: 20px;
+}
+.Action-name:hover {
+  background: url("./images/pointer-1.png") no-repeat left;
+}
+.Pointer {
+  flex: 1;
+}
+
+/* quitar esto hacia abajo, en otro css */
+.Life-meter-1, .Life-meter-2 {
+  display: flex;
+  flex-direction: column;
+  height: 12px;
+  margin: 5px;
+  
+}
+.Life-meter-1 {
+  grid-column: 4/8;
+  /* background: url("./images/lifemeter-3.png") bottom left no-repeat #efefef; */
+}
+.Life-meter-2 {
+  grid-column: 10/14;
+  grid-row: 1/2;
+  /* background: url("./images/lifemeter-3.png") top right no-repeat #efefef; */
+
+}
+
+.Life-meter-container {
+  flex: 1;
+  background: #efefef;
+  border: solid 3px #713e5a;
+
+}
+
+.Life-bar {
+  width: 100%;
+  height: 10px;
+}
+.Life-bar-image {
+  background: url("./images/life-bar.png") left no-repeat;
+}
+.Life-bar-content {
+  display: flex;
+  flex-direction: row;
+  width: 96px;
+  margin-left: 30px;
+}
+.Life-count {
+  height: 20px;
+  margin-top: 2px;
+  padding: 2px;
+}
+.Life-count-container {
+  background: url("./images/life-count.png") bottom left no-repeat;
+  text-align: center ;
+  font-size: 16px;
+  height: 100%;
+}
+.Life-count-points {
+  height: 100%;
+  padding: 3px 0 0 50px;
+}
+
+.Life-point {
+  width: 1px;
+  height: 14px;
+}
+.Life-point-image {
+  background: url("./images/lifepoint-1.png") center;
+  height: 12px;
+}
+
+.Menu {
+  height: 100%;
+  background: url('./images/gamepad-1.jpg');
+}
