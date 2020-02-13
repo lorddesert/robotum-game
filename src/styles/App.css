@@ -13,6 +13,13 @@ a:link, a:visited, a:link {
 }
 
 .Field {
-  background: url("./lifemeter-3.png") left bottom no-repeat white;
+  background: white;
   color: black;
+}
+
+.Footer {
+  height: 150px;
+  background-color: #0f0f0f;
+  padding: 5px;
+  margin-top: 25px;
 }

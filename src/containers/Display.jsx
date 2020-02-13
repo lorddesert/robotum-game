@@ -1,11 +1,11 @@
 import React from 'react';
-import Screen from '../components/Screen';
+import Game from '../components/Game';
 
 const Display = () => {
   return (
     <div className="Display">
       <div className="Display-container">
-        <Screen />
+        <Game />
       </div>
     </div>
   );
