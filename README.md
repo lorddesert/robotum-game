@@ -1,1 +1,1 @@
-An attempt for make a real game.
+A Yakuza turn-based game in first place, doing mechanics of a new pokemon-based game with *all* new characters.s
