@@ -8,7 +8,7 @@ git:
   depth: 3
 script:
   - yarn build
-  - echo 'robotum-game' > public/CNAME
+  - echo 'cv.arepa.dev' > public/CNAME
 deploy:
   name: sacha.nocetto@hotmail.com
   provider: pages
@@ -18,6 +18,6 @@ deploy:
   local-dir: dist/
   target-branch: master
   commit_message: "sacha.nocetto@hotmail.com - Deploy release ${TRAVIS_TAG}"
-  fqdn: robotum-game
+  fqdn: cv.arepa.dev
   on:
     branch: develop
