@@ -8,5 +8,7 @@ import './styles/Header.css';
 import './styles/reset.css';
 import './styles/App.css';
 
+// import './styles/images';
+
 
 ReactDOM.render(<App />, document.getElementById('root'));
