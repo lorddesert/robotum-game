@@ -1,16 +1,72 @@
-{
-  "players": [{
-    "player1": {
+[
+    {
       "name": "Nitsuga",
-      "image": "nitsuga.jpg",
-      "attack": "10",
-      "life": "100"
+      "attacks" : [
+        {
+          "name": "Puño Sedentario",
+          "description": "Golpeas con tu puño sediento de la sangre de tu oponente ( inflige 10 de daño )",
+          "damage": 10
+        },
+        {
+          "name": "Patada del Dragon Tuerto",
+          "description": "Inflige 5 de daño, con probabilidad de hacer daño critico si acierta.",
+          "damage": 5
+        }
+      ],
+      "specials": [
+         {
+          "name": "Kamenyameya",
+          "description": "Solo se puede hacer cuando tiene menos de la mitad de la vida, si sale bien el objetivo M U E R E.",
+          "damage": "90-100"
+        },
+        {
+          "name": "Rica Hamburguesa",
+          "description": "Recuperas 15 puntos de vida, tiene 2 usos.",
+          "heal": 15,
+          "uses": 2
+        },
+        {
+          "name": "¡Do a Barrel Roll!",
+          "description": "¡Gran probabilidad de esquive!",
+          "chance": 50
+        },
+        {
+          "name": "Papotearse",
+          "description": "Te re das con la mejor merca de ituzaingo, ¿Quien sabe los efectos que tendra?",
+          "effects": "adiotional turn"
+        }
+      ]
     },
-    "player2": {
+    {
       "name": "Gnaro",
-      "image": "gnaro.jpg",
-      "attack": "20",
-      "life": "100"
+      "attacks":[
+        {
+          "name": "Golpe Duro",
+          "description":  "Inflige un moton de daño, solo por ser Gnaro (15 de daño)",
+          "damage": 15
+        },
+        {
+          "name": "¡Dispara!",
+          "description": "Solo tras haber usado Sacando el Fierro, disparas haciendo 25 de daño, consume la bala. No se puede esquivar",
+          "damage": 30
+        }
+      ],
+      "specials": [
+        {
+          "name": "Sacando el Fierro",
+          "description": "Sacas la 9mm cargando UNA bala, consume 1 turno, pero tu proximo ataque sera mortifero",
+          "damage": 0
+        },
+        {
+          "name": "Tramontina",
+          "description": "Sacas el tramontina y acometes violentamente",
+          "damage": 25
+        },
+        {
+          "name": "Rompe Cuellos",
+          "description": "si se usa 3 veces, matas a tu enemigo.",
+          "uses": 3
+        }
+      ]
     }
-  }]
-}
+]
