@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import Menu from './Menu';
 
 // Components
@@ -39,7 +38,14 @@ export default class Game extends Component {
     f()
   }
 
+  timer = () => {
+    setTimeout(this.changeMenu, 2000);
+  }
+
   changeMenu = () => {
+    const audio = document.getElementById("audio");
+    // try introduce settimeout here.
+    audio.play();
     this.setState({menu: false});
   }
 
@@ -47,7 +53,7 @@ export default class Game extends Component {
     if(this.state.menu)
       return <Menu changeMenu={this.changeMenu} />
     else
-    return (
+      return (
     <div className="Game">
       <div className="Game-container">
         <Field
@@ -56,7 +62,7 @@ export default class Game extends Component {
           updateState={this.updateState}
           f={this.handleClick}
         />
-        <ActionBar   />
+        <ActionBar/>
       </div>
     </div>
   )};

@@ -1,22 +1,99 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Action from './Action';
 import Message from './Message';
+import players from '../players/players.json';
+// import Actions from '../scripts/
+// import the list of movements
+class ActionBar extends Component {
 
-const ActionBar = (props) => {
-  return (
-    <div className="Actbar">
-      <div className="Actbar-container">
-          <div className="Message">
-            <Message/>
+  state = {
+    toggleShowOptions: true,
+    nitsuga : players[0]
+  }
+  
+  showList = ' ';
+
+  //It woorks
+  toggleShow = e => {
+    e.persist();
+    e.preventDefault()
+    if(e.target.innerText == 'Ataques' || e.target.innerText == 'Atras' || e.target.innerText == 'Especiales') {
+      if(e.target.innerText == 'Ataques' || e.target.innerText == 'Especiales') {
+        this.showList = e.target.innerText;
+      }
+      this.setState((state) => ({
+        toggleShowOptions: !state.toggleShowOptions
+      }))
+    }
+    // else if(e.target.innerText == 'Atras')
+    // {
+    //   this.setState((state) => ({
+    //     toggleShowOptions: !state.toggleShowOptions
+    //   }))
+    }
+
+  render = () =>{
+    // const { player1, player2 } = players;
+    // const player1 = players.player1;
+    if(this.showList == "Ataques" && !this.state.toggleShowOptions) {
+      return (
+        <div className="Actbar">
+          <div className="Actbar-container">
+              <div className="Message">
+                <Message/>
+              </div>
+              <div className="Actions">
+                <div className="Actions-container">
+                  {this.state.nitsuga.attacks.map((atk, i) => <Action action={atk.name} key={i} handleClick={this.toggleShow} />)}
+                  <Action action="Atras" handleClick={this.toggleShow} />
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="Actions">
-            <Action action="Attack" handleClick={props.handleClick} />
-            <Action action="Defend" />
-            <Action action="Special" />
+      );
+    }
+    else if (this.showList == "Especiales" && !this.state.toggleShowOptions) {
+      return (
+        <div className="Actbar">
+        <div className="Actbar-container">
+            <div className="Message">
+              <Message/>
+            </div>
+            <div className="Actions">
+              <div className="Actions-container">
+                {this.state.nitsuga.specials.map((atk, i) =>
+                <Action
+                action={atk.name}
+                key={i}
+                handleClick={this.toggleShow}
+                />)}
+                <Action action="Atras" handleClick={this.toggleShow} />
+              </div>
+            </div>
           </div>
+        </div>
+        );
+    }
+
+    return (
+      <div className="Actbar">
+        <div className="Actbar-container">
+            <div className="Message">
+              <Message/>
+            </div>
+            <div className="Actions">
+              {/* If i press one action, show the attack, or special movement's list */}
+              {this.state.toggleShowOptions &&
+                <div className="Actions-container">
+                  <Action action="Ataques" handleClick={this.toggleShow} />
+                  <Action action="Especiales" handleClick={this.toggleShow}/>
+                </div>
+              }
+            </div>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default ActionBar;

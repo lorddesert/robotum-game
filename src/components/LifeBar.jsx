@@ -41,7 +41,7 @@ export default class LifeBar extends Component {
 
   componentDidMount() {
     // window.addEventListener("click", this.handleEvent);
-    console.log(`${this.turn}`)
+    // console.log(`los componentes se han montado, el estado del jugador ${this.props.number} es: ${this.turn}`);  
   }
 
   render() {
