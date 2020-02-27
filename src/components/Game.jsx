@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import Menu from './Menu';
 
 // Components
+import Menu from './Menu';
 import Field from './Field';
 import ActionBar from './ActionBar';
+import PlayerSelect from './PlayerSelect'
 
 export default class Game extends Component {
 
@@ -25,24 +26,16 @@ export default class Game extends Component {
     menu: true
   }
 
-  handleEvent = (e) => {
-    e.preventDefault();
-    e.persist
-    console.log(e);
-    if(this.state.player1Life > 0)
-    this.setState((state) => ({player1Life: state.player1Life - 10}))
-    console.log(this.state)
-  }
-
   updateState = (f) => {
     f()
   }
 
   timer = () => {
-    setTimeout(this.changeMenu, 2000);
+    
   }
 
   changeMenu = () => {
+    // setTimeout(this.timer, 1900);
     const audio = document.getElementById("audio");
     // try introduce settimeout here.
     audio.play();
@@ -52,6 +45,9 @@ export default class Game extends Component {
   render () {
     if(this.state.menu)
       return <Menu changeMenu={this.changeMenu} />
+    else if(this.state.playerSelect) {
+      return <PlayerSelect />
+    }
     else
       return (
     <div className="Game">
@@ -59,8 +55,6 @@ export default class Game extends Component {
         <Field
           player1Life={this.state.player1Life}
           player2Life={this.state.player2Life}
-          updateState={this.updateState}
-          f={this.handleClick}
         />
         <ActionBar/>
       </div>

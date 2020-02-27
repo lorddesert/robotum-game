@@ -19,8 +19,9 @@ class TransitionAnm extends Component {
     </div>
   );
 
+  // || e.target.innerText === 'Gnaro' || e.target.innerText === 'Nitsuga'
   handleEvent = e => {
-    if(e.target.innerText === 'Start' || e.target.innerText === 'Gnaro' || e.target.innerText === 'Nitsuga') {
+    if(e.target.innerText === 'Start') {
       myBtn(myAnm);
 
     }
