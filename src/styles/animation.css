@@ -25,7 +25,7 @@ body {
   display: none;
   width: 2vw;
   background: black;
-  animation: animation 800ms;
+  animation: animation 800ms ease-out;
   animation-fill-mode: forwards;
 }
 #Anim {
