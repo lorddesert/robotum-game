@@ -55,7 +55,7 @@ export default class Field extends Component {
       console.log(this.state.player2);
     }
     else if(!this.state.player2.turn) {
-      if(abilityName == '¡Dispara!')
+      if(abilityName == '¡Dispara!') {
         this.setState((state) => ({
           player1: {
             ...state.player1,
@@ -69,6 +69,9 @@ export default class Field extends Component {
             bullet: false
           }
         }));
+        const audio = document.getElementById('shoot');
+        audio.play();
+      }
       else if(abilityName == 'Sacando el Fierro'){
         this.setState((state) => ({
           player1: {
@@ -83,6 +86,8 @@ export default class Field extends Component {
             bullet: true
           }
         }));
+        const audio = document.getElementById('recharge');
+        audio.play();
       }
       else
         this.setState((state) => ({

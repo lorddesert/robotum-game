@@ -33,11 +33,11 @@ export default class LifeMeter extends Component {
 
   //Event methods
   handleEvent = e => {
-    this.compareWithNitsugaAttacks(e) // compareWithNitsugaAttacks && props.doAction = executeAction?
-    this.compareWithNitsugaSpecials(e);
-    // if(e.target.innerText != 'Start' && e.target.innerText != 'Ataques' && e.target.innerText != 'Especiales' &&
-    // e.target.innerText != 'Atras')
-    //   this.changeNitsugaTurn();
+    // If nitsugas turn is false
+    if(this.state.number == "1" && !this.props.turn) {
+      this.compareWithNitsugaAttacks(e);
+      this.compareWithNitsugaSpecials(e);
+    }
   }
   changeNpcTurn = () => {
     let decision = makeChoice(this.props.player.bullet);
@@ -50,36 +50,42 @@ export default class LifeMeter extends Component {
   compareWithNitsugaAttacks = e => {
     for(let i = 0; i < this.state.player.attacks.length; i++) {
       if(e.target.innerText == this.state.player.attacks[i].name && this.state.number == "1" && !this.state.turn) {
-        console.log('paso el primer if')
         if(e.target.innerText == "Patada del Dragon Tuerto") {
-          console.log('paso el segundo if')
             let prob = this.getRandomInt();
-            console.log("la probabilidad de exito es " + prob);
             if(prob >= 80) {
-              criticAnm(changeDisplay);
-              this.props.doAction(this.state.player.attacks[i].damage + 25);
+              document.getElementById('kick').play();
+             setTimeout(() => {
+               this.props.doAction(this.state.player.attacks[i].damage + 25);
+               criticAnm(changeDisplay);
+              }, 600);
             }
             else {
-              this.props.doAction(this.state.player.attacks[i].damage);
+              document.getElementById('kick').play();
+              setTimeout(() => { this.props.doAction(this.state.player.attacks[i].damage );}, 600);
+              // this.props.doAction(this.state.player.attacks[i].damage);
             }
         }
         else {
-        this.props.doAction(this.state.player.attacks[i].damage);
+          this.props.doAction(this.state.player.attacks[i].damage);
+          document.getElementById('punch').play();
         }
       }
     }
   }
   compareWithNitsugaSpecials = e => {
     for(let i = 0; i < this.state.player.specials.length; i++) {
-      if(e.target.innerText == this.state.player.specials[i].name && this.state.number == "2") {
+      if(e.target.innerText == this.state.player.specials[i].name && this.state.number == "1") {
         if(e.target.innerText == "Kamenyameya") {
-          let dmg = kamenyameya(this.state.lifePoints);
+          let dmg = this.state.lifePoints;
           console.log("asdasd" + dmg)
           if(dmg >= 80)
-            this.props.doAction(dmg);
+            setTimeout(() => {
+              this.props.doAction(dmg);
+              document.getElementById('kamen').play()
+            }, 400);
           else if(this.turn)
             alert("Fallaste!");
-            this.turn = !this.turn;
+            this.props.doAction(0);
         }
 
 
@@ -145,11 +151,7 @@ export default class LifeMeter extends Component {
   //Lifecycle methods
   componentDidUpdate() {
     if(this.props.number == '2' && this.props.turn == false) {
-      // console.log(this.props.turn)
-      // this.props.doAction(0, 'Sacando el Fierro');
-      
-      setTimeout(this.changeNpcTurn, 800) // funciona
-      // this.changeNpcTurn();
+      setTimeout(this.changeNpcTurn, 800)
     }
     if(this.props.lifePoints <= 0) {
       alert("ganaste!");
