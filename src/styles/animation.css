@@ -40,11 +40,11 @@ body {
   overflow: hidden !important;
 }
 
-.Critic {
+.Critic, .Miss {
   grid-column: 15/17;
   grid-row: 14/16;
 }
-#criticMsg {
+#criticMsg, #missMsg {
   
   animation: movement 800ms forwards;
   font-size: 6em;
