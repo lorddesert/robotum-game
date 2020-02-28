@@ -39,6 +39,7 @@
     },
     {
       "name": "Gnaro",
+      "bleedingUses": 2,
       "attacks":[
         {
           "name": "Golpe Duro",
@@ -59,8 +60,9 @@
         },
         {
           "name": "Tramontina",
-          "description": "Sacas el tramontina y acometes violentamente",
-          "damage": 25
+          "description": "Aplica sangrado ( quita 5 pts de vida por turno ).",
+          "damage": 15,
+          "bleeding": 5
         },
         {
           "name": "Rompe Cuellos",
