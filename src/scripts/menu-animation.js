@@ -21,14 +21,24 @@ export function myAnm () {
 
 }
 
-export function criticAnm (changeDisplay) {
+export function criticAnm(changeCritDisplay) {
   const critic = document.getElementById("criticMsg");
   critic.style.display = "block"
-  setTimeout(changeDisplay, 501);
+  setTimeout(changeCritDisplay, 501);
 }
 
-export function changeDisplay() {
+export function missAnm(changeMissDisplay) {
+  const miss = document.getElementById("missMsg");
+  miss.style.display = "block"
+  setTimeout(changeMissDisplay, 501);
+}
+
+export function changeCritDisplay() {
   const critic = document.getElementById("criticMsg");
   critic.style.display = "none";
+}
+export function changeMissDisplay () {
+  const miss = document.getElementById("missMsg");
+  miss.style.display = "none";
 }
 

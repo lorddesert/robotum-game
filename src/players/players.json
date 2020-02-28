@@ -22,7 +22,7 @@
         {
           "name": "Rica Hamburguesa",
           "description": "Recuperas 15 puntos de vida, tiene 2 usos.",
-          "heal": 15,
+          "heal": 20,
           "uses": 2
         },
         {

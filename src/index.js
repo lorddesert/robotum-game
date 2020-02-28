@@ -7,6 +7,8 @@ import './styles/Display.css';
 import './styles/Header.css';
 import './styles/reset.css';
 import './styles/App.css';
+import './styles/animation.css';
+
 
 // Images
 // import './styles/images/background.jpg';
