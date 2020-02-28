@@ -39,11 +39,11 @@ module.exports = {
         ],
       },
       {
-        test: /\.mp3$/,
+        test: /\.mp3$/i,
         loader: 'file-loader',
       },
       {
-        test: /\.mp4$/,
+        test: /\.mp4$/i,
         loader: 'url-loader',
       },
       {
