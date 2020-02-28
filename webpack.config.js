@@ -39,8 +39,12 @@ module.exports = {
         ],
       },
       {
-        test: /\.(mp3|mp4)$/,
+        test: /\.mp3$/,
         loader: 'file-loader',
+      },
+      {
+        test: /\.mp4$/,
+        loader: 'url-loader',
       },
       {
         test: /\.(svg|eot|ttf|woff|woff2)$/i,
