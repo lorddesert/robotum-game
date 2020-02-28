@@ -17,7 +17,8 @@ export default class Field extends Component {
       attacks: [...players[0].attacks],
       specials: [...players[0].specials],
       RHUses: 2,
-      amplifiedDamage: 0
+      amplifiedDamage: 0,
+      bleeding: 0
     },
     player2: {
       lifePoints: 100,
@@ -54,7 +55,7 @@ export default class Field extends Component {
             ...state.player1,
             turn: !state.player1.turn,
             lifePoints: state.player1.lifePoints + 15,
-            RHUses: state.RHUses - 1
+            RHUses: state.player1.RHUses - 1
           }
         }))
       }

@@ -97,7 +97,8 @@ export default class LifeMeter extends Component {
           }
         }
         else if(e.target.innerText == "Rica Hamburguesa") {
-          if(this.props.player.RHUses) {
+          console.log(this.props.player.RHUses);
+          if(this.props.player.RHUses > 0) {
           document.getElementById('rica-hamburgesa').play()
           setTimeout(() => {
             this.props.doAction(15, "Rica Hamburguesa"); // Gains 15 life points

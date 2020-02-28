@@ -9,20 +9,6 @@ import PlayerSelect from './PlayerSelect'
 export default class Game extends Component {
 
   state = {
-    // players: {
-    //   player1:
-    //   {
-    //     life: 100,
-    //     attack: 10
-    //   },
-    //   player2:
-    //   {
-    //     life: 100,
-    //     attack: 20
-    //   }
-    // }
-    player1Life: 100,
-    player2Life: 100,
     menu: true
   }
 
@@ -37,6 +23,7 @@ export default class Game extends Component {
   changeMenu = () => {
     // setTimeout(this.timer, 1900);
     const audio = document.getElementById("audio");
+    audio.volume = "0.4";
     // try introduce settimeout here.
     audio.play();
     this.setState({menu: false});
