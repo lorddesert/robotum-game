@@ -9,6 +9,16 @@ import './styles/reset.css';
 import './styles/App.css';
 import './styles/animation.css';
 
+import './music/disparo.mp4';
+import './music/kamenyameya.mp4';
+import './music/papotearse.mp4';
+import './music/patada.mp4';
+import './music/punch.mp4';
+import './music/recarga.mp4';
+import './music/rica-hamburgesa.mp4';
+
+
+
 
 // Images
 // import './styles/images/background.jpg';
