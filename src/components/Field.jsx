@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Player from './Player';
 import LifeMeter from './LifeMeter';
 import Critic from './Critic';
+import Miss from './Miss';
 import players from '../players/players.json';
 
 export default class Field extends Component {
@@ -15,6 +16,8 @@ export default class Field extends Component {
       turn: false,
       attacks: [...players[0].attacks],
       specials: [...players[0].specials],
+      RHUses: 2,
+      amplifiedDamage: 0
     },
     player2: {
       lifePoints: 100,
@@ -40,11 +43,42 @@ export default class Field extends Component {
     console.log(damageTaken);
     // console.log(`es el turno del jugador ${this.state.number} y su valor es: ${this.turn}`);
     if(this.state.player2.turn) {
+      if(abilityName == 'Rica Hamburguesa') {
+        this.setState((state) => ({
+          player2: {
+            ...state.player2,
+            turn: !state.player2.turn,
+            lifePoints: state.player2.lifePoints
+          },
+          player1: {
+            ...state.player1,
+            turn: !state.player1.turn,
+            lifePoints: state.player1.lifePoints + 15,
+            RHUses: state.RHUses - 1
+          }
+        }))
+      }
+    else if(abilityName == 'Papotearse') {
       this.setState((state) => ({
         player2: {
           ...state.player2,
           turn: !state.player2.turn,
-          lifePoints: state.player2.lifePoints - damageTaken
+          lifePoints: state.player2.lifePoints
+        },
+        player1: {
+          ...state.player1,
+          turn: !state.player1.turn,
+          lifePoints: state.player1.lifePoints,
+          amplifiedDamage: 10
+        }
+      }))
+    }
+    else
+      this.setState((state) => ({
+        player2: {
+          ...state.player2,
+          turn: !state.player2.turn,
+          lifePoints: state.player2.lifePoints - damageTaken - state.player1.amplifiedDamage
         },
         player1: {
           ...state.player1,
@@ -102,14 +136,15 @@ export default class Field extends Component {
             lifePoints: state.player2.lifePoints
           }
         }));
-      // console.dir(this.state.player1, this.state.player2)
-
     }
   }
 
   render = () => (
     <div className="Field" name="asd">
       <div className="Field-container">
+        {/* this.state.player1.lifePoints && this.state.player2.lifePoints   &&
+            imprimir player X win! and credits. */}
+        <Miss />
         <Critic />
         <Player name="Player-1" number="1"/>
         <Player name="Player-2" number="2"/>

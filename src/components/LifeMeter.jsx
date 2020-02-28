@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import memoize from 'memoize-one';
-import { kamenyameya, barrelRoll, deliciousHamburger } from '../scripts/specialMovements';
-import { criticAnm, changeDisplay } from '../scripts/menu-animation';
-import { makeChoice } from '../scripts/gnaro';
 import LifePoint from './LifePoint';
+
+import { kamenyameya, barrelRoll, deliciousHamburger } from '../scripts/specialMovements';
+import { criticAnm, changeCritDisplay } from '../scripts/menu-animation';
+import { missAnm, changeMissDisplay } from '../scripts/menu-animation';
+import { makeChoice } from '../scripts/gnaro';
 
 export default class LifeMeter extends Component {
 
@@ -34,7 +36,7 @@ export default class LifeMeter extends Component {
   //Event methods
   handleEvent = e => {
     // If nitsugas turn is false
-    if(this.state.number == "1" && !this.props.turn) {
+    if(this.state.number == "1" && !this.props.turn && e.target.innerText != 'Start') {
       this.compareWithNitsugaAttacks(e);
       this.compareWithNitsugaSpecials(e);
     }
@@ -51,18 +53,16 @@ export default class LifeMeter extends Component {
     for(let i = 0; i < this.state.player.attacks.length; i++) {
       if(e.target.innerText == this.state.player.attacks[i].name && this.state.number == "1" && !this.state.turn) {
         if(e.target.innerText == "Patada del Dragon Tuerto") {
-            let prob = this.getRandomInt();
-            if(prob >= 80) {
+            if(this.getRandomInt() >= 80) {
               document.getElementById('kick').play();
-             setTimeout(() => {
-               this.props.doAction(this.state.player.attacks[i].damage + 25);
-               criticAnm(changeDisplay);
-              }, 600);
+              setTimeout(() => {
+                this.props.doAction(this.state.player.attacks[i].damage + 25);
+                criticAnm(changeCritDisplay);
+                }, 600);
             }
             else {
               document.getElementById('kick').play();
               setTimeout(() => { this.props.doAction(this.state.player.attacks[i].damage );}, 600);
-              // this.props.doAction(this.state.player.attacks[i].damage);
             }
         }
         else {
@@ -76,32 +76,49 @@ export default class LifeMeter extends Component {
     for(let i = 0; i < this.state.player.specials.length; i++) {
       if(e.target.innerText == this.state.player.specials[i].name && this.state.number == "1") {
         if(e.target.innerText == "Kamenyameya") {
-          let dmg = this.state.lifePoints;
-          console.log("asdasd" + dmg)
-          if(dmg >= 80)
-            setTimeout(() => {
-              this.props.doAction(dmg);
-              document.getElementById('kamen').play()
-            }, 400);
-          else if(this.turn)
-            alert("Fallaste!");
+          const lifePointsLeft = this.props.lifePoints;
+          const prob = this.getRandomInt();
+          console.log(prob);
+          if(lifePointsLeft <= 50) {
+            if(prob >= 30) {
+              document.getElementById('kamen').play();
+              setTimeout(() => {
+                this.props.doAction(20 + lifePointsLeft);
+              }, 3500);
+            }
+            else {
+              missAnm(changeMissDisplay);
+              this.props.doAction(0);
+            }
+          }
+          else {
+            missAnm(changeMissDisplay);
             this.props.doAction(0);
-        }
-
-
-        else if(e.target.innerText == "Rica Hamburguesa") {
-          if(!this.turn && this.state.number == "1") {
-            let LifePointsGained = this.getRandomInt()
-            console.log(this.state.player.specials[i].uses)
-            this.props.doAction(LifePointsGained);
-            this.state.player.specials[i].uses = this.state.player.specials[i].uses - 1;
-            console.log(this.state.player.specials[i].uses)
           }
         }
+        else if(e.target.innerText == "Rica Hamburguesa") {
+          if(this.props.player.RHUses) {
+          document.getElementById('rica-hamburgesa').play()
+          setTimeout(() => {
+            this.props.doAction(15, "Rica Hamburguesa"); // Gains 15 life points
+          }, 3000);
+          }
+          else {
+            missAnm(changeMissDisplay);
+            this.props.doAction(0);
+          }
+        }
+        else if(e.target.innerText == "Papotearse") {
+          document.getElementById('papotearse').play();
+          setTimeout(() => {
+            this.props.doAction(10, "Papotearse"); // Gains 10 points of aditional damage
+          }, 3000);
+          }
+        }
+      }
 
-
-        else
-          this.props.doAction(this.state.player.specials[i].damage);
+        // else
+        //   this.props.doAction(this.state.player.specials[i].damage);
           // console.log("NO PASO POR KAMEN")
           // Adjust barrel roll when the IA it's finished.
           // else if(e.target.innerText == "¡Do a Barrel Roll!") {
@@ -111,18 +128,16 @@ export default class LifeMeter extends Component {
           //     this.props.doAction(dmg);
           //   else alert("Fallaste!");
           // }
-        }
-        else if(e.target.innerText == this.state.player.specials[i].name && this.state.number == "1" && !this.turn)
-          if(e.target.innerText == "Rica Hamburguesa") {
-              let LifePointsGained = deliciousHamburger(this.state.player.specials[i].uses)
-              console.log(this.state.player.specials[i].uses)
-              console.log(LifePointsGained);
-              this.props.doAction(LifePointsGained);
-              this.state.player.specials[i].uses = this.state.player.specials[i].uses - 1;
-              console.log(this.state.player.specials[i].uses)
-            }
+        // else if(e.target.innerText == this.state.player.specials[i].name && this.state.number == "1" && !this.turn)
+        //   if(e.target.innerText == "Rica Hamburguesa") {
+        //       let LifePointsGained = deliciousHamburger(this.state.player.specials[i].uses)
+        //       console.log(this.state.player.specials[i].uses)
+        //       console.log(LifePointsGained);
+        //       this.props.doAction(LifePointsGained);
+        //       this.state.player.specials[i].uses = this.state.player.specials[i].uses - 1;
+        //       console.log(this.state.player.specials[i].uses)
+        //     }
     }
-  }
   compareWithGnaroSpecials = decision => {
     for(let i = 0; i < this.state.player.specials.length; i++)
       if(decision == this.state.player.specials[i].name)
