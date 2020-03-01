@@ -16,7 +16,7 @@ const Menu = (props) => {
             <span className="first-letter">Y</span>akuza X
           </h2>
         </div>
-        <MenuBtn onClick={props.changeMenu} />
+        <MenuBtn onClick={props.onClick} />
       </div>
     </div>
   );

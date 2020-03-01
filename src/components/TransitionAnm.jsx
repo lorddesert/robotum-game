@@ -21,9 +21,8 @@ class TransitionAnm extends Component {
 
   // || e.target.innerText === 'Gnaro' || e.target.innerText === 'Nitsuga'
   handleEvent = e => {
-    if(e.target.innerText === 'Start') {
+    if(e.target.innerText === 'Start' || e.target.innerText === 'Confirm') {
       myBtn(myAnm);
-
     }
   }
 }

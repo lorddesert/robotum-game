@@ -250,6 +250,60 @@
 
 }
 
+.PlayerSelect-container {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  background: #666666;
+  height: 100vh;
+}
+.PlayerSelect-container button {
+  width: 20vw;
+  background: transparent;
+  border: black 2px solid;
+  font-size: 2rem;
+  height: 10vh;
+  border-radius: 37px;
+  font-family: 'yakuza', Arial, Helvetica, sans-serif;
+  transition: all 1700ms;
+  cursor: pointer;
+}
+.PlayerSelect-container button:nth-child(2) {
+  transition: all 0.2s;
+  opacity: 0;
+  cursor: unset;
+  color: #efefef;
+  border: #efefef 2px solid;
+}
+.PlayerSelect-container button:nth-child(2):hover {
+  cursor: pointer;
+  color: #ac0000;
+  border: #ac0000 2px solid;
+
+}
+
+.PlayerSelect-imgs {
+  display: flex;
+  overflow: hidden;
+}
+.PlayerSelect img {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0;
+  transition: all 2s;
+}
+/* .PlayerSelect img:hover {
+  opacity: 1;
+} */
+.PlayerSelect-btns {
+  width: 100%;
+  position: absolute;
+  top: 80vh;
+  display: flex;
+  justify-content: space-evenly;
+}
+
 @media (max-width: 760px) {
   .Message-container {
     justify-content: flex-start;

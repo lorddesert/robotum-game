@@ -31,20 +31,12 @@ module.exports = {
         use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.(png|jpe?g|gif|)$/i,
+        test: /\.(png|jpe?g|gif|mp3|mp4)$/i,
         use: [
           {
           loader: 'file-loader',
           },
         ],
-      },
-      {
-        test: /\.mp3$/i,
-        loader: 'file-loader',
-      },
-      {
-        test: /\.mp4$/i,
-        loader: 'url-loader',
       },
       {
         test: /\.(svg|eot|ttf|woff|woff2)$/i,
