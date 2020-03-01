@@ -9,6 +9,7 @@ import './styles/reset.css';
 import './styles/App.css';
 import './styles/animation.css';
 
+import audio from '../src/styles/music/Yakuza 0 OST   03 Force Addiction.mp3';
 import './styles/music/disparo.mp4';
 import './styles/music/kamenyameya.mp4';
 import './styles/music/papotearse.mp4';
