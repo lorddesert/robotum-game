@@ -31,7 +31,7 @@ module.exports = {
         use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.(png|jpe?g|gif|mp3|mp4)$/i,
+        test: /\.(png|jpe?g|gif)$/i,
         use: [
           {
           loader: 'file-loader',
@@ -39,7 +39,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.(svg|eot|ttf|woff|woff2)$/i,
+        test: /\.(svg|eot|ttf|woff|woff2|mp3|mp4)$/i,
         loader: 'url-loader',
         options: {
           limit: 8192,
