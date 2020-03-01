@@ -24,9 +24,6 @@ module.exports = {
         test: /\.html$/,
         use: [{
           loader: 'html-loader',
-          options: {
-            attrs: [":src"]
-          }
         }]
       },
       {
@@ -38,9 +35,6 @@ module.exports = {
         use: [
           {
           loader: 'file-loader',
-          options: {
-            name: '[name].[ext]'
-          }
           },
         ],
       },
