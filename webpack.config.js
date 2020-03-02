@@ -31,15 +31,19 @@ module.exports = {
         use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.(png|jpe?g|gif)$/i,
+        test: /\.(png|jpe?g|gif|mp3|mp4)$/i,
         use: [
           {
           loader: 'file-loader',
+          options: {
+            outputPath: 'images',
+            name: '[name].[ext]'
+          }
           },
         ],
       },
       {
-        test: /\.(svg|eot|ttf|woff|woff2|mp3|mp4)$/i,
+        test: /\.(svg|eot|ttf|woff|woff2)$/i,
         loader: 'url-loader',
         options: {
           limit: 8192,
