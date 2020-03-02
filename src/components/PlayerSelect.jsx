@@ -1,4 +1,7 @@
 import React from 'react';
+import gnaro from '../../src/styles/images/player-select-gnaro.jpg';
+import nitsuga from '../../src/styles/images/player-select-nitsuga.jpg';
+
 
 const handleClick = e => {
   console.log(e.target.innerText);
@@ -35,10 +38,10 @@ const PlayerSelect = props => {
       <div className="PlayerSelect-container">
         <div className="PlayerSelect-imgs">
           <div className="NitsugaSelect">
-            <img id="nitsugaImg" src="../../src/styles/images/player-select-nitsuga.jpg" alt="Nitsuga"/>
+            <img id="nitsugaImg" src={nitsuga} alt="Nitsuga"/>
           </div>
           <div className="GnaroSelect" >
-            <img id="gnaroImg" src="../../src/styles/images/player-select-gnaro.jpg" alt="Gnaro"/>
+            <img id="gnaroImg" src={gnaro} alt="Gnaro"/>
           </div>
           <div className="PlayerSelect-btns">
             <button className="btn" onClick={handleClick}>Nitsuga</button>

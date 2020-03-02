@@ -4,6 +4,7 @@ import React from 'react';
 import Display from './Display';
 import Header from './Header';
 import Footer from './Footer';
+import Audio from './Audio';
 
 function handleCLick(e) {
   e.preventDefault();
@@ -18,6 +19,7 @@ const App = () => {
       <div className='App-container'>
         <div className='App-content'>
           {/* <Header /> */}
+          <Audio />
           <Display />
           {/* <Footer /> */}
         </div>
