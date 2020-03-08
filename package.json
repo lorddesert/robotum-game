@@ -1,6 +1,6 @@
 {
   "name": "robotum-game",
-  "version": "1.0.0",
+  "version": "0.5.0",
   "description": "An attempt for make a real game.",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,7 @@
     "url": "git+https://github.com/lorddesert/robotum-game.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Sacha Nocetto",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/lorddesert/robotum-game/issues"
