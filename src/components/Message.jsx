@@ -1,23 +1,14 @@
 import React, { Component } from 'react';
-import players from '../players/players.json';
-// import { kamenyamenya, deliciusHamburguer }
 
 export default class Message extends Component {
-
-
   // rojo: 800f09 rojo oscuro: 2e0708
   state = {
-    // msg: "Your turn"
-    msg: ' '
+    msg: ' ',
   }
-
   msg = 'Your turn'
-  //The turn is false, because the player 1 starts first (false = player 1 turn)
   turn = false;
-  i = 0;
-
+  i = 0; //For letter counter
   mOverMsg = true
-  
   time = 0;
 
   componentDidMount() {
@@ -27,64 +18,37 @@ export default class Message extends Component {
   }
 
   handleMEvent = (e) => {
-    const nitsuga = players[0];
-    // console.log(e.explicitOriginalTarget.data);
+    console.log(this.props.player1);
     if(e.explicitOriginalTarget.data == "Ataques" && this.mOverMsg) {
       this.i = 0;
-      // this.mOverMsg = false;
       this.msg = 'Lista de ataques';
       this.setState({msg: ' '})
       this.changeMsg();
     }
     else if(e.explicitOriginalTarget.data == "Especiales" && this.mOverMsg) {
       this.i = 0;
-      // this.mOverMsg = false;
       this.msg = 'Lista de especiales';
       this.setState({msg: ' '})
       this.changeMsg();
     }
 
-    for(let i = 0; i < nitsuga.attacks.length; i++) {
-      if(e.explicitOriginalTarget.data == nitsuga.attacks[i].name && this.mOverMsg) {
+    for(let i = 0; i < this.props.player1.attacks.length; i++) {
+      if(e.explicitOriginalTarget.data == this.props.player1.attacks[i].name && this.mOverMsg) {
         this.i = 0;
-        // this.mOverMsg = false;
-        this.msg =  nitsuga.attacks[i].description;
-        this.setState({msg: ' '})
+        this.msg =  this.props.player1.attacks[i].description;
+        this.setState({msg: ' '});
         this.changeMsg();
       }
     }
 
-    for(let i = 0; i < nitsuga.specials.length; i++) {
-      if(e.explicitOriginalTarget.data == nitsuga.specials[i].name && this.mOverMsg) {
+    for(let i = 0; i < this.props.player1.specials.length; i++) {
+      if(e.explicitOriginalTarget.data == this.props.player1.specials[i].name && this.mOverMsg) {
         this.i = 0;
-        // this.mOverMsg = false;
-        this.msg =  nitsuga.specials[i].description;
+        this.msg =  this.props.player1.specials[i].description;
         this.setState({msg: ' '})
         this.changeMsg();
       }
     }
-    // }
-    // else if(e.explicitOriginalTarget.data == nitsuga.attacks[0].name && this.mOverMsg) {
-    //   this.i = 0;
-    //   // this.mOverMsg = false;
-    //   this.msg =  nitsuga.attacks[0].description;
-    //   this.setState({msg: ' '})
-    //   this.changeMsg();
-    // }
-    // else if(e.explicitOriginalTarget.data == nitsuga.attacks[1].name && this.mOverMsg) {
-    //   this.i = 0;
-    //   // this.mOverMsg = false;
-    //   this.msg =  nitsuga.attacks[1].description;
-    //   this.setState({msg: ' '})
-    //   this.changeMsg();
-    // }
-    // else if(e.explicitOriginalTarget.data == nitsuga.attacks[2].name && this.mOverMsg) {
-    //   this.i = 0;
-    //   // this.mOverMsg = false;
-    //   this.msg =  nitsuga.attacks[2].description;
-    //   this.setState({msg: ' '})
-    //   this.changeMsg();
-    // }
   }
 
   handleEvent = (e) => {

@@ -8,7 +8,7 @@ class ActionBar extends Component {
 
   state = {
     toggleShowOptions: true,
-    nitsuga : players[0]
+    player : this.props.player1
   }
   
   showList = ' ';
@@ -25,26 +25,19 @@ class ActionBar extends Component {
         toggleShowOptions: !state.toggleShowOptions
       }))
     }
-    // else if(e.target.innerText == 'Atras')
-    // {
-    //   this.setState((state) => ({
-    //     toggleShowOptions: !state.toggleShowOptions
-    //   }))
-    }
+  }
 
-  render = () =>{
-    // const { player1, player2 } = players;
-    // const player1 = players.player1;
+  render = () => {
     if(this.showList == "Ataques" && !this.state.toggleShowOptions) {
       return (
         <div className="Actbar">
           <div className="Actbar-container">
               <div className="Message">
-                <Message/>
+                <Message player1={this.state.player} />
               </div>
               <div className="Actions">
                 <div className="Actions-container">
-                  {this.state.nitsuga.attacks.map((atk, i) => <Action action={atk.name} key={i} handleClick={this.toggleShow} />)}
+                  {this.state.player.attacks.map((atk, i) => <Action action={atk.name} key={i} handleClick={this.toggleShow} />)}
                   <Action action="Atras" handleClick={this.toggleShow} />
                 </div>
               </div>
@@ -57,16 +50,17 @@ class ActionBar extends Component {
         <div className="Actbar">
         <div className="Actbar-container">
             <div className="Message">
-              <Message/>
+              <Message player1={this.state.player} />
             </div>
             <div className="Actions">
               <div className="Actions-container">
-                {this.state.nitsuga.specials.map((atk, i) =>
-                <Action
-                action={atk.name}
-                key={i}
-                handleClick={this.toggleShow}
-                />)}
+                {this.state.player.specials.map((atk, i) =>
+                  <Action
+                    action={atk.name}
+                    key={i}
+                    handleClick={this.toggleShow}
+                  />)
+                }
                 <Action action="Atras" handleClick={this.toggleShow} />
               </div>
             </div>

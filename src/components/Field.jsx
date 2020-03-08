@@ -1,37 +1,20 @@
-import React, { Component } from 'react';
-import Player from './Player';
-import LifeMeter from './LifeMeter';
-import Critic from './Critic';
-import Miss from './Miss';
-import players from '../players/players.json';
+import React, { Component } from "react";
+import Player from "./Player";
+import LifeMeter from "./LifeMeter";
+import Critic from "./Critic";
+import Miss from "./Miss";
+import players from "../players/players.json";
 
 export default class Field extends Component {
 
   // the turn is based in who receive damage,
   // true = recieve damage in this turn.
   state = {
-
-    player1: {
-      lifePoints: 100,
-      turn: false,
-      attacks: [...players[0].attacks],
-      specials: [...players[0].specials],
-      RHUses: 2,
-      amplifiedDamage: 0,
-      bleeding: 0
-    },
-    player2: {
-      lifePoints: 100,
-      turn: true,
-      attacks: [...players[1].attacks],
-      specials: [...players[1].specials],
-      bullet: false
-    },
-    damageTaken: 0
+    player1: {...this.props.player1, turn: false},
+    player2: {...this.props.player2, turn: true}
   }
 
   //Player Methods
-
   addBullet = () => {
     this.setState(() => ({
       player2: !state.player2.bullet
@@ -40,11 +23,12 @@ export default class Field extends Component {
   }
 
   doAction = (damageTaken, abilityName) => {
+    console.log(this.state, players);
     console.log(abilityName);
     console.log(damageTaken);
     // console.log(`es el turno del jugador ${this.state.number} y su valor es: ${this.turn}`);
     if(this.state.player2.turn) {
-      if(abilityName == 'Rica Hamburguesa') {
+      if(abilityName == "Rica Hamburguesa") {
         this.setState((state) => ({
           player2: {
             ...state.player2,
@@ -54,92 +38,198 @@ export default class Field extends Component {
           player1: {
             ...state.player1,
             turn: !state.player1.turn,
-            lifePoints: state.player1.lifePoints + 15,
+            lifePoints: state.player1.lifePoints + damageTaken,
             RHUses: state.player1.RHUses - 1
           }
         }))
       }
-    else if(abilityName == 'Papotearse') {
-      this.setState((state) => ({
-        player2: {
-          ...state.player2,
-          turn: !state.player2.turn,
-          lifePoints: state.player2.lifePoints
-        },
-        player1: {
-          ...state.player1,
-          turn: !state.player1.turn,
-          lifePoints: state.player1.lifePoints,
-          amplifiedDamage: 10
-        }
-      }))
-    }
-    else
-      this.setState((state) => ({
-        player2: {
-          ...state.player2,
-          turn: !state.player2.turn,
-          lifePoints: state.player2.lifePoints - damageTaken - state.player1.amplifiedDamage
-        },
-        player1: {
-          ...state.player1,
-          turn: !state.player1.turn,
-          lifePoints: state.player1.lifePoints
-        }
-      }))
-      console.log(this.state.player2);
-    }
-    else if(!this.state.player2.turn) {
-      if(abilityName == '¡Dispara!') {
+      else if(abilityName == "Papotearse") {
         this.setState((state) => ({
-          player1: {
-            ...state.player1,
-            turn: !state.player1.turn,
-            lifePoints: state.player1.lifePoints - damageTaken
-          },
-          player2: {
-            ...state.player2,
-            turn: !state.player2.turn,
-            lifePoints: state.player2.lifePoints,
-            bullet: false
-          }
-        }));
-        const audio = document.getElementById('shoot');
-        audio.play();
-      }
-      else if(abilityName == 'Sacando el Fierro'){
-        this.setState((state) => ({
-          player1: {
-            ...state.player1,
-            turn: !state.player1.turn,
-            lifePoints: state.player1.lifePoints
-          },
-          player2: {
-            ...state.player2,
-            turn: !state.player2.turn,
-            lifePoints: state.player2.lifePoints,
-            bullet: true
-          }
-        }));
-        const audio = document.getElementById('recharge');
-        audio.play();
-      }
-      else
-        this.setState((state) => ({
-          player1: {
-            ...state.player1,
-            turn: !state.player1.turn,
-            lifePoints: state.player1.lifePoints - damageTaken
-          },
           player2: {
             ...state.player2,
             turn: !state.player2.turn,
             lifePoints: state.player2.lifePoints
+          },
+          player1: {
+            ...state.player1,
+            turn: !state.player1.turn,
+            lifePoints: state.player1.lifePoints,
+            amplifiedDamage: state.player1.amplifiedDamage + 10
+          }
+        }))
+      }
+      // Gnaro"s specials left
+      else if(this.state.player1.name == "Gnaro") {
+        if(abilityName == "¡Dispara!") {
+          this.setState((state) => ({
+            player1: {
+              ...state.player1,
+              turn: !state.player1.turn,
+              lifePoints: state.player1.lifePoints
+            },
+            player2: {
+              ...state.player2,
+              turn: !state.player2.turn,
+              lifePoints: state.player2.lifePoints - damageTaken,
+              bullet: false
+            }
+          }));
+          const audio = document.getElementById("shoot");
+          audio.play();
+        }
+        else if(abilityName == "Sacando el Fierro") {
+          this.setState((state) => ({
+            player1: {
+              ...state.player1,
+              turn: !state.player1.turn,
+              lifePoints: state.player1.lifePoints,
+              bullet: true
+            },
+            player2: {
+              ...state.player2,
+              turn: !state.player2.turn,
+              lifePoints: state.player2.lifePoints,
+            }
+          }));
+          const audio = document.getElementById("recharge");
+          audio.play();
+        }
+        else {
+          console.log("Paso por el area de gnaro, el daño es: ", damageTaken);
+          this.setState((state) => ({
+            player2: {
+              ...state.player2,
+              turn: !state.player2.turn,
+              lifePoints: state.player2.lifePoints - damageTaken
+            },
+            player1: {
+              ...state.player1,
+              turn: !state.player1.turn,
+              lifePoints: state.player1.lifePoints
+            }
+          }));
+        }
+      }
+      else
+        this.setState((state) => ({
+          player2: {
+            ...state.player2,
+            turn: !state.player2.turn,
+            lifePoints: state.player2.lifePoints - damageTaken - state.player1.amplifiedDamage
+          },
+          player1: {
+            ...state.player1,
+            turn: !state.player1.turn,
+            lifePoints: state.player1.lifePoints
           }
         }));
     }
+    // Nitsuga"s attacks left
+    else if(!this.state.player2.turn) {
+      console.log("")
+      if(this.state.player2.name == "Nitsuga") {
+        if(abilityName == "Rica Hamburguesa") {
+          this.setState((state) => ({
+            player2: {
+              ...state.player2,
+              turn: !state.player2.turn,
+              lifePoints: state.player2.lifePoints + damageTaken,
+              RHUses: state.player2.RHUses - 1
+            },
+            player1: {
+              ...state.player1,
+              turn: !state.player1.turn,
+              lifePoints: state.player1.lifePoints
+            }
+          }))
+        }
+        else if(abilityName == "Papotearse") {
+          this.setState((state) => ({
+            player2: {
+              ...state.player2,
+              turn: !state.player2.turn,
+              lifePoints: state.player2,
+              amplifiedDamage: state.player2.amplifiedDamage + 10
+            },
+            player1: {
+              ...state.player1,
+              turn: !state.player1.turn,
+              lifePoints: state.player1.lifePoints,
+            }
+          }));
+        }
+        else
+          this.setState((state) => ({
+            player2: {
+              ...state.player2,
+              turn: !state.player2.turn,
+              lifePoints: state.player2.lifePoints
+            },
+            player1: {
+              ...state.player1,
+              turn: !state.player1.turn,
+              lifePoints: state.player1.lifePoints - damageTaken - state.player2.amplifiedDamage
+            }
+          }));
+    }
+      else {
+        console.log(this.state.player2, "PASO POR EL ELSE IF");
+        if(abilityName == "¡Dispara!") {
+          this.setState((state) => ({
+            player1: {
+              ...state.player1,
+              turn: !state.player1.turn,
+              lifePoints: state.player1.lifePoints - damageTaken
+            },
+            player2: {
+              ...state.player2,
+              turn: !state.player2.turn,
+              lifePoints: state.player2.lifePoints,
+              bullet: false
+            }
+          }));
+          const audio = document.getElementById("shoot");
+          audio.play();
+        }
+        else if(abilityName == "Sacando el Fierro") {
+          this.setState((state) => ({
+            player1: {
+              ...state.player1,
+              turn: !state.player1.turn,
+              lifePoints: state.player1.lifePoints
+            },
+            player2: {
+              ...state.player2,
+              turn: !state.player2.turn,
+              lifePoints: state.player2.lifePoints,
+              bullet: true
+            }
+          }));
+          const audio = document.getElementById("recharge");
+          audio.play();
+        }
+        else {
+          console.log("paso por donde no debia")
+          this.setState((state) => ({
+            player1: {
+              ...state.player1,
+              turn: !state.player1.turn,
+              lifePoints: state.player1.lifePoints - damageTaken
+            },
+            player2: {
+              ...state.player2,
+              turn: !state.player2.turn,
+              lifePoints: state.player2.lifePoints
+            }
+          }));
+       }
+      }
+    }
   }
 
+  componentDidMount() {
+    console.log(this.state);
+  }
   render = () => (
     <div className="Field" name="asd">
       <div className="Field-container">
@@ -147,8 +237,14 @@ export default class Field extends Component {
             imprimir player X win! and credits. */}
         <Miss />
         <Critic />
-        <Player name="Player-1" number="1"/>
-        <Player name="Player-2" number="2"/>
+        <Player
+          name={this.state.player1.name}
+          number="1"
+        />
+         <Player
+            name={this.state.player2.name}
+            number="2"
+          />
         <LifeMeter
           player={this.state.player1}
           number="1"

@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
-import memoize from 'memoize-one';
 import LifePoint from './LifePoint';
 
-import { kamenyameya, barrelRoll, deliciousHamburger } from '../scripts/specialMovements';
-import { criticAnm, changeCritDisplay } from '../scripts/menu-animation';
-import { missAnm, changeMissDisplay } from '../scripts/menu-animation';
+import { criticAnm, changeCritDisplay, missAnm, changeMissDisplay, changePlayersDisplay } from '../scripts/menu-animation';
 import { makeChoice } from '../scripts/gnaro';
 
 export default class LifeMeter extends Component {
@@ -35,25 +32,41 @@ export default class LifeMeter extends Component {
 
   //Event methods
   handleEvent = e => {
+    console.log(e.target.innerText);
     // If nitsugas turn is false
     if(this.state.number == "1" && !this.props.turn && e.target.innerText != 'Start') {
-      this.compareWithNitsugaAttacks(e);
-      this.compareWithNitsugaSpecials(e);
+      if(this.state.player.name == "Gnaro") {
+        this.compareWithGnaroAttacks(e.target.innerText);
+        this.compareWithGnaroSpecials(e.target.innerText);
+      }
+      else {
+        this.compareWithNitsugaAttacks(e.target.innerText);
+        this.compareWithNitsugaSpecials(e.target.innerText);
+      }
     }
   }
   changeNpcTurn = () => {
-    let decision = makeChoice(this.props.player.bullet);
+    let decision = makeChoice(this.props.player.bullet, this.props.player.name, this.props.player.lifePoints);
     console.log(`la decision es: ${decision}`);
-    this.compareWithGnaroAttacks(decision);
-    this.compareWithGnaroSpecials(decision);
+    if(this.state.player.name == "Gnaro") {
+      this.compareWithGnaroAttacks(decision);
+      this.compareWithGnaroSpecials(decision);
+    }
+    else {
+      this.compareWithNitsugaAttacks(decision);
+      this.compareWithNitsugaSpecials(decision);
+    }
+    // this.compareWithGnaroAttacks(decision);
+    // this.compareWithGnaroSpecials(decision);
+    // this.compareWithNitsugaAttacks(decision);
   }
 
   //Players methods
-  compareWithNitsugaAttacks = e => {
+  compareWithNitsugaAttacks = decision => {
     for(let i = 0; i < this.state.player.attacks.length; i++) {
-      if(e.target.innerText == this.state.player.attacks[i].name && this.state.number == "1" && !this.state.turn) {
-        if(e.target.innerText == "Patada del Dragon Tuerto") {
-            if(this.getRandomInt() >= 80) {
+      if(decision == this.state.player.attacks[i].name) {
+        if(decision == "Patada del Dragon Tuerto") {
+            if(this.getRandomInt() >= 60) {
               document.getElementById('kick').play();
               setTimeout(() => {
                 this.props.doAction(this.state.player.attacks[i].damage + 25);
@@ -72,10 +85,10 @@ export default class LifeMeter extends Component {
       }
     }
   }
-  compareWithNitsugaSpecials = e => {
+  compareWithNitsugaSpecials = decision => {
     for(let i = 0; i < this.state.player.specials.length; i++) {
-      if(e.target.innerText == this.state.player.specials[i].name && this.state.number == "1") {
-        if(e.target.innerText == "Kamenyameya") {
+      if(decision == this.state.player.specials[i].name) {
+        if(decision == "Kamenyameya") {
           const lifePointsLeft = this.props.lifePoints;
           const prob = this.getRandomInt();
           console.log(prob);
@@ -96,12 +109,12 @@ export default class LifeMeter extends Component {
             this.props.doAction(0);
           }
         }
-        else if(e.target.innerText == "Rica Hamburguesa") {
+        else if(decision == "Rica Hamburguesa") {
           console.log(this.props.player.RHUses);
           if(this.props.player.RHUses > 0) {
-          document.getElementById('rica-hamburgesa').play()
+          document.getElementById('rica-hamburgesa').play();
           setTimeout(() => {
-            this.props.doAction(15, "Rica Hamburguesa"); // Gains 15 life points
+            this.props.doAction(this.state.player.specials[i].heal, "Rica Hamburguesa"); // Gains 15 life points
           }, 3000);
           }
           else {
@@ -109,7 +122,7 @@ export default class LifeMeter extends Component {
             this.props.doAction(0);
           }
         }
-        else if(e.target.innerText == "Papotearse") {
+        else if(decision == "Papotearse") {
           document.getElementById('papotearse').play();
           setTimeout(() => {
             this.props.doAction(10, "Papotearse"); // Gains 10 points of aditional damage
@@ -117,36 +130,29 @@ export default class LifeMeter extends Component {
           }
         }
       }
-
-        // else
-        //   this.props.doAction(this.state.player.specials[i].damage);
-          // console.log("NO PASO POR KAMEN")
-          // Adjust barrel roll when the IA it's finished.
-          // else if(e.target.innerText == "¡Do a Barrel Roll!") {
-          //   let probability = this.getRandomInt();
-          //   console.log("asdasd" + dmg)
-          //   if(probability >= 50)
-          //     this.props.doAction(dmg);
-          //   else alert("Fallaste!");
-          // }
-        // else if(e.target.innerText == this.state.player.specials[i].name && this.state.number == "1" && !this.turn)
-        //   if(e.target.innerText == "Rica Hamburguesa") {
-        //       let LifePointsGained = deliciousHamburger(this.state.player.specials[i].uses)
-        //       console.log(this.state.player.specials[i].uses)
-        //       console.log(LifePointsGained);
-        //       this.props.doAction(LifePointsGained);
-        //       this.state.player.specials[i].uses = this.state.player.specials[i].uses - 1;
-        //       console.log(this.state.player.specials[i].uses)
-        //     }
-    }
+  }
   compareWithGnaroSpecials = decision => {
     for(let i = 0; i < this.state.player.specials.length; i++)
       if(decision == this.state.player.specials[i].name)
         if(decision == this.state.player.specials[i].name) {
-          if(decision == 'Sacando el Fierro') {
-            console.log(`gnaro recargo`);
+          if(decision == "Sacando el Fierro") {
+            console.log("gnaro recargo");
             this.props.doAction(this.props.player.specials[i].damage, decision);
-        }
+          }
+          else if(decision == "Tramontina") {
+            console.log("gnaro acuchicho");
+            document.getElementById("tramontina").play();
+            setTimeout(() => {
+              this.props.doAction(this.props.player.specials[i].damage, decision);
+            }, 2000);
+          }
+          else if(decision == "Rompe Cuellos") {
+            console.log("gnaro aprieta el cuello");
+            document.getElementById("rompecuellos").play();
+            setTimeout(() => {
+              this.props.doAction(this.props.player.specials[i].damage, decision);
+            }, 1000);
+          }
       }
   }
   compareWithGnaroAttacks = decision => {
@@ -157,20 +163,23 @@ export default class LifeMeter extends Component {
           console.log(this.props.player.attacks[i].damage);
           this.props.doAction(this.props.player.attacks[i].damage, decision);
         }
+        else if(decision == "Zarandeada") {
+          console.log(this.props.player.attacks[i].damage);
+          document.getElementById("zarandeada").play();
+          this.props.doAction(this.props.player.attacks[i].damage, decision);
+        }
       }
-        // else {
-        //   console.log("Gnaro hizo :" + this.state.player.attacks[i].damage + " de daño");
-        //   this.props.doAction(this.state.player.attacks[i].damage);
-        // }
-      }
+  }
 
   //Lifecycle methods
   componentDidUpdate() {
-    if(this.props.number == '2' && this.props.turn == false) {
-      setTimeout(this.changeNpcTurn, 800)
+    if(this.props.number == "2" && this.props.turn == false && this.props.lifePoints > 0) {
+      setTimeout(this.changeNpcTurn, 800);
     }
     if(this.props.lifePoints <= 0) {
-      alert("ganaste!");
+      document.getElementById("deathSound").play();
+      changePlayersDisplay(this.state.number);
+
     }
 
   }
@@ -183,7 +192,7 @@ export default class LifeMeter extends Component {
     return(
     <div
       className={"Life-meter-" + this.state.number}
-      id="lifeMeter"
+      id={`lifeMeter-${this.props.number}`}
     >
       <div className="Life-meter-container">
         <div className="Life-bar">
