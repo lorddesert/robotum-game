@@ -42,18 +42,19 @@
 }
 
 
-.Player-1, .Player-2 {
+.player-1, .player-2 {
   display: flex;
 }
-.Player-1 {
-  grid-column: 1/4;
+.player-1 {
+  grid-column: 1/5;
   grid-row: 10/16;
 }
-.Player-2 {
-  grid-column: 30/36;
+.player-2 {
+  grid-column: 30/35;
+  grid-row: 1/7;
 
 }
-.Player-1-container, .Player-2-container {
+.player-1-container, .player-2-container {
   flex: 1;
 }
 

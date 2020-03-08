@@ -3,24 +3,12 @@ body {
   padding: 0;
 }
 
-/* Funciona con EN DIV POSITION ABSOLUTE EN MAIN POSITION STATIC Y LOS ANIM CON HEIGHT: 100VW o menos*/
-/*APARENTEMENTE LOS ELEMTNOS UQE NO TENGAN POSITION DECLARADO? O EN STATIC NO SE VEN AFECTADOS POR
-  LOS ELEMTNOS CON POSITION ABSOLUTE */
-
-/* div {
-  overflow: hidden;
-  /* position: absolute; */
-
 #Anim-container {
-  /* position: static; */
   height: 100vh;
   display: none;
-  /* justify-content: center; */
-  /* background: black; */
 }
 
 #Anim, #Anim-2 {
-  /* height: 100vw; */
   overflow: hidden !important;
   display: none;
   width: 2vw;
@@ -45,7 +33,6 @@ body {
   grid-row: 14/16;
 }
 #criticMsg, #missMsg {
-  
   animation: movement 800ms forwards;
   font-size: 6em;
   color: transparent;
@@ -57,6 +44,11 @@ body {
   display: none;
   font-family: 'yakuza', Arial, Helvetica, sans-serif;
 }
+#lifeMeter-1, #lifeMeter-2, #playerImg-1, #playerImg-2 {
+  transition: all 0.5s;
+}
+
+
 
 @keyframes movement {
   0% {
@@ -76,61 +68,22 @@ body {
   }
 }
 
-/* 50% {
-  transform: translateX(40vw);
-  width: 50vw;
-} */
-
-/* para 75% translate 20vw */
-/*
-
-
-
-*/
-  /* 25% {
-    width: 40vw;
-  
-  }
-  
-  75% {
-    /* transform: translateX(15vw); */
-    /* width: 50vw; */
-  
-    /* width: 50vw; */
-  /* } */ 
-
-
-
-
-
 @keyframes animation {
   0% {
     transform: translateX(0%);
   }
   50% {
     width: 100vw;
-    /* transform: translateX(10vw) */
-    /* transform: translateX(60vw); */
   }
-  /* 25% {
-    width: 100vw;
-    transform: translateX(0vw);
-    y 75% en 10vw
-  } */
 
   75% {
     width: 100vw;
     transform: translateX(0vw);
-    /* transform: translateX(10vw) */
 
   }
 
   100% {
     transform: translateX(110vw);
-    /* transform: translateX(80vw); */
-    /* width: 10vw; */
-    /* transform: translateX(1vw); */
-    /* transform: translateX(80vw); */
     display: none;
 
   }
