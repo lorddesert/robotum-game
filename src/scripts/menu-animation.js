@@ -42,3 +42,15 @@ export function changeMissDisplay () {
   miss.style.display = "none";
 }
 
+export function changePlayersDisplay(player) {
+  if(player == '1') {
+    document.getElementById("playerImg-1").style.opacity = "0";
+    document.getElementById("lifeMeter-1").style.opacity = "0";
+  }
+  else {
+    document.getElementById("playerImg-2").style.opacity = "0";
+    document.getElementById("lifeMeter-2").style.opacity = "0";
+  }
+
+}
+
