@@ -10,11 +10,23 @@ import patada from '../styles/music/patada.mp4';
 import punch from '../styles/music/punch.mp4';
 import recarga from '../styles/music/recarga.mp4';
 import hamburgesa from '../styles/music/rica-hamburgesa.mp4';
+import zarandeada from '../styles/music/zarandeada.mp3';
+import rompecuellos from '../styles/music/rompecuellos.ogg';
+import tramontina from '../styles/music/tramontina.ogg';
+import deathSound from '../styles/music/deathSound.mp3';
 
 const Audio = () => {
   return (
     <div style={{display: 'none'}}>
       <audio id="audio" loop controls src={yakuza}>
+      </audio>
+      <audio id="deathSound" controls src={deathSound}>
+      </audio>
+      <audio id="rompecuellos" controls src={rompecuellos}>
+      </audio>
+      <audio id="tramontina" controls src={tramontina}>
+      </audio>
+      <audio id="zarandeada" controls src={zarandeada}>
       </audio>
       <audio id="shoot" src={shoot}>
       </audio>
