@@ -14,6 +14,7 @@ import zarandeada from '../styles/music/zarandeada.mp3';
 import rompecuellos from '../styles/music/rompecuellos.ogg';
 import tramontina from '../styles/music/tramontina.ogg';
 import deathSound from '../styles/music/deathSound.mp3';
+import ending from '../styles/music/ending.mp3';
 
 const Audio = () => {
   return (
@@ -21,6 +22,8 @@ const Audio = () => {
       <audio id="audio" loop controls src={yakuza}>
       </audio>
       <audio id="deathSound" controls src={deathSound}>
+      </audio>
+      <audio id="ending" controls src={ending}>
       </audio>
       <audio id="rompecuellos" controls src={rompecuellos}>
       </audio>
