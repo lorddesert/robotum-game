@@ -1,10 +1,12 @@
 import React, { Component } from "react";
+import { myBtn, myAnm } from '../scripts/menu-animation';
 
 // Components
 import Menu from "./Menu";
 import Field from "./Field";
 import ActionBar from "./ActionBar";
-import PlayerSelect from "./PlayerSelect"
+import PlayerSelect from "./PlayerSelect";
+import Credits from './Credits';
 import players from "../players/players.json";
 
 export default class Game extends Component {
@@ -12,10 +14,11 @@ export default class Game extends Component {
   state = {
     menu: true,
     playerSelect: false,
-    player1: " ",
-    player2: " "
+    credits: false,
+    player1: null,
+    player2: null
   }
-  
+
   handleClick = e => {
     if(e.target.innerText == "Nitsuga")
       this.setState(state => ({
@@ -34,6 +37,10 @@ export default class Game extends Component {
     console.log(this.state);
   }
 
+  changeToCredits = () => {
+    myBtn(myAnm);
+    this.setState({credits: true});
+  }
   changeMenu = e => {
     if(e.target.innerText == "Confirm") {
       // setTimeout(this.timer, 1900);
@@ -57,11 +64,13 @@ export default class Game extends Component {
       return <Menu onClick={this.changeMenu} />
     else if(this.state.playerSelect)
       return <PlayerSelect onClick={this.changeMenu} />
+    else if(this.state.credits)
+      return <Credits />
     else
       return (
     <div className="Game">
       <div className="Game-container">
-        <Field player1={this.state.player1} player2={this.state.player2} />
+        <Field player1={this.state.player1} player2={this.state.player2} changeToCredits={this.changeToCredits} />
         <ActionBar player1={this.state.player1} player2={this.state.player2} />
       </div>
     </div>

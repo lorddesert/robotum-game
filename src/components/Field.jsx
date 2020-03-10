@@ -26,7 +26,6 @@ export default class Field extends Component {
     console.log(this.state, players);
     console.log(abilityName);
     console.log(damageTaken);
-    // console.log(`es el turno del jugador ${this.state.number} y su valor es: ${this.turn}`);
     if(this.state.player2.turn) {
       if(abilityName == "Rica Hamburguesa") {
         this.setState((state) => ({
@@ -124,7 +123,6 @@ export default class Field extends Component {
           }
         }));
     }
-    // Nitsuga"s attacks left
     else if(!this.state.player2.turn) {
       console.log("")
       if(this.state.player2.name == "Nitsuga") {
@@ -233,8 +231,6 @@ export default class Field extends Component {
   render = () => (
     <div className="Field" name="asd">
       <div className="Field-container">
-        {/* this.state.player1.lifePoints && this.state.player2.lifePoints   &&
-            imprimir player X win! and credits. */}
         <Miss />
         <Critic />
         <Player
@@ -251,6 +247,7 @@ export default class Field extends Component {
           lifePoints={this.state.player1.lifePoints}
           turn={this.state.player1.turn}
           doAction={this.doAction}
+          changeToCredits={this.props.changeToCredits}
         />
         <LifeMeter
           player={this.state.player2}
@@ -258,6 +255,7 @@ export default class Field extends Component {
           lifePoints={this.state.player2.lifePoints}
           turn={this.state.player2.turn}
           doAction={this.doAction}
+          changeToCredits={this.props.changeToCredits}
         />
       </div>
     </div>

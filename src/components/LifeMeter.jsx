@@ -46,7 +46,7 @@ export default class LifeMeter extends Component {
     }
   }
   changeNpcTurn = () => {
-    let decision = makeChoice(this.props.player.bullet, this.props.player.name, this.props.player.lifePoints);
+    let decision = makeChoice(this.props.player.bullet, this.props.player.name, this.props.player.lifePoints, this.props.player.RHUses);
     console.log(`la decision es: ${decision}`);
     if(this.state.player.name == "Gnaro") {
       this.compareWithGnaroAttacks(decision);
@@ -56,9 +56,6 @@ export default class LifeMeter extends Component {
       this.compareWithNitsugaAttacks(decision);
       this.compareWithNitsugaSpecials(decision);
     }
-    // this.compareWithGnaroAttacks(decision);
-    // this.compareWithGnaroSpecials(decision);
-    // this.compareWithNitsugaAttacks(decision);
   }
 
   //Players methods
@@ -159,10 +156,17 @@ export default class LifeMeter extends Component {
     for(let i = 0; i < this.state.player.attacks.length; i++)
       if(decision == this.state.player.attacks[i].name) {
         if(decision == "¡Dispara!") {
-          console.log("Gnaro disparo!")
-          console.log(this.props.player.attacks[i].damage);
-          this.props.doAction(this.props.player.attacks[i].damage, decision);
+          if(this.state.player.bullet) {
+            console.log("Gnaro disparo!");
+            console.log(this.props.player.attacks[i].damage);
+            this.props.doAction(this.props.player.attacks[i].damage, decision);
+          }
+          else {
+            missAnm(changeMissDisplay);
+            this.props.doAction(0);
+          }
         }
+
         else if(decision == "Zarandeada") {
           console.log(this.props.player.attacks[i].damage);
           document.getElementById("zarandeada").play();
@@ -179,9 +183,13 @@ export default class LifeMeter extends Component {
     if(this.props.lifePoints <= 0) {
       document.getElementById("deathSound").play();
       changePlayersDisplay(this.state.number);
+      setTimeout(() => {
+        document.getElementById("audio").pause();
+        this.props.changeToCredits();
+        document.getElementById("ending").play();
+      }, 1000);
 
     }
-
   }
   componentDidMount() {
     window.addEventListener("click", this.handleEvent);

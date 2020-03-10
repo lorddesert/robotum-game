@@ -18,7 +18,6 @@ export default class Message extends Component {
   }
 
   handleMEvent = (e) => {
-    console.log(this.props.player1);
     if(e.explicitOriginalTarget.data == "Ataques" && this.mOverMsg) {
       this.i = 0;
       this.msg = 'Lista de ataques';
