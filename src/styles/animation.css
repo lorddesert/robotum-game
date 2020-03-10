@@ -47,8 +47,49 @@ body {
 #lifeMeter-1, #lifeMeter-2, #playerImg-1, #playerImg-2 {
   transition: all 0.5s;
 }
+/* Credits */
+.Credits-container {
+  text-align: center;
+  width: 100vw;
+  margin: auto;
+  height: 100vh;
+  background: #efefef;
+  display: flex;
+}
 
+.Credits-content {
+  flex: 1;
+  overflow: hidden;
+  background: radial-gradient(#efefef, black);
+}
+.Credits {
+  margin-top: 100vh;
+  animation: creditsAnimation 35s ease forwards;
+  font-size: 3rem;
+}
+.Credits section {
+  color: rgba(0, 0, 0, 0.5);
+  text-shadow: 0 0 1px #ede3e9;
+  margin-top: 10vh;
+}
+.Credits h3 {
+  color:  #ede3e9;
+  margin-bottom: 12vh;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 1);
+}
 
+#thanks {
+  margin-top: 65vh;
+}
+
+@keyframes creditsAnimation {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+  100% {
+    transform: translateX(0) translateY(-320vh);
+  }
+}
 
 @keyframes movement {
   0% {
