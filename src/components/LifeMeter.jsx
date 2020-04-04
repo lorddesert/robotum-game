@@ -32,8 +32,8 @@ export default class LifeMeter extends Component {
 
   //Event methods
   handleEvent = e => {
-    console.log(e.target.innerText);
     // If nitsugas turn is false
+    // console.log(e.target.innerText);
     if(this.state.number == "1" && !this.props.turn && e.target.innerText != 'Start') {
       if(this.state.player.name == "Gnaro") {
         this.compareWithGnaroAttacks(e.target.innerText);
@@ -47,7 +47,7 @@ export default class LifeMeter extends Component {
   }
   changeNpcTurn = () => {
     let decision = makeChoice(this.props.player.bullet, this.props.player.name, this.props.player.lifePoints, this.props.player.RHUses);
-    console.log(`la decision es: ${decision}`);
+    // console.log(`la decision es: ${decision}`);
     if(this.state.player.name == "Gnaro") {
       this.compareWithGnaroAttacks(decision);
       this.compareWithGnaroSpecials(decision);
@@ -88,7 +88,7 @@ export default class LifeMeter extends Component {
         if(decision == "Kamenyameya") {
           const lifePointsLeft = this.props.lifePoints;
           const prob = this.getRandomInt();
-          console.log(prob);
+          // console.log(prob);
           if(lifePointsLeft <= 50) {
             if(prob >= 30) {
               document.getElementById('kamen').play();
@@ -107,7 +107,7 @@ export default class LifeMeter extends Component {
           }
         }
         else if(decision == "Rica Hamburguesa") {
-          console.log(this.props.player.RHUses);
+          // console.log(this.props.player.RHUses);
           if(this.props.player.RHUses > 0) {
           document.getElementById('rica-hamburgesa').play();
           setTimeout(() => {
@@ -133,18 +133,18 @@ export default class LifeMeter extends Component {
       if(decision == this.state.player.specials[i].name)
         if(decision == this.state.player.specials[i].name) {
           if(decision == "Sacando el Fierro") {
-            console.log("gnaro recargo");
+            // console.log("gnaro recargo");
             this.props.doAction(this.props.player.specials[i].damage, decision);
           }
           else if(decision == "Tramontina") {
-            console.log("gnaro acuchicho");
+            // console.log("gnaro acuchicho");
             document.getElementById("tramontina").play();
             setTimeout(() => {
               this.props.doAction(this.props.player.specials[i].damage, decision);
             }, 2000);
           }
           else if(decision == "Rompe Cuellos") {
-            console.log("gnaro aprieta el cuello");
+            // console.log("gnaro aprieta el cuello");
             document.getElementById("rompecuellos").play();
             setTimeout(() => {
               this.props.doAction(this.props.player.specials[i].damage, decision);
@@ -156,9 +156,9 @@ export default class LifeMeter extends Component {
     for(let i = 0; i < this.state.player.attacks.length; i++)
       if(decision == this.state.player.attacks[i].name) {
         if(decision == "¡Dispara!") {
-          if(this.state.player.bullet) {
-            console.log("Gnaro disparo!");
-            console.log(this.props.player.attacks[i].damage);
+          if(this.props.player.bullet) {
+            // console.log("Gnaro disparo!");
+            // console.log(this.props.player.attacks[i].damage);
             this.props.doAction(this.props.player.attacks[i].damage, decision);
           }
           else {
@@ -168,7 +168,7 @@ export default class LifeMeter extends Component {
         }
 
         else if(decision == "Zarandeada") {
-          console.log(this.props.player.attacks[i].damage);
+          // console.log(this.props.player.attacks[i].damage);
           document.getElementById("zarandeada").play();
           this.props.doAction(this.props.player.attacks[i].damage, decision);
         }
@@ -193,7 +193,7 @@ export default class LifeMeter extends Component {
   }
   componentDidMount() {
     window.addEventListener("click", this.handleEvent);
-    console.log(`los componentes se han montado, el estado del jugador ${this.props.number} es: ${this.state.player.turn}`);
+    // console.log(`los componentes se han montado, el estado del jugador ${this.props.number} es: ${this.state.player.turn}`);
   }
 
   render() {
