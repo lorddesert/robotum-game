@@ -19,13 +19,13 @@ export default class Field extends Component {
     this.setState(() => ({
       player2: !state.player2.bullet
     }))
-    console.log(`bullet: ${this.bullet}`);
+    // console.log(`bullet: ${this.bullet}`);
   }
 
   doAction = (damageTaken, abilityName) => {
-    console.log(this.state, players);
-    console.log(abilityName);
-    console.log(damageTaken);
+    // console.log(this.state, players);
+    // console.log(abilityName);
+    // console.log(damageTaken);
     if(this.state.player2.turn) {
       if(abilityName == "Rica Hamburguesa") {
         this.setState((state) => ({
@@ -94,7 +94,7 @@ export default class Field extends Component {
           audio.play();
         }
         else {
-          console.log("Paso por el area de gnaro, el daño es: ", damageTaken);
+          // console.log("Paso por el area de gnaro, el daño es: ", damageTaken);
           this.setState((state) => ({
             player2: {
               ...state.player2,
@@ -124,7 +124,6 @@ export default class Field extends Component {
         }));
     }
     else if(!this.state.player2.turn) {
-      console.log("")
       if(this.state.player2.name == "Nitsuga") {
         if(abilityName == "Rica Hamburguesa") {
           this.setState((state) => ({
@@ -171,7 +170,7 @@ export default class Field extends Component {
           }));
     }
       else {
-        console.log(this.state.player2, "PASO POR EL ELSE IF");
+        // console.log(this.state.player2, "PASO POR EL ELSE IF");
         if(abilityName == "¡Dispara!") {
           this.setState((state) => ({
             player1: {
@@ -207,7 +206,7 @@ export default class Field extends Component {
           audio.play();
         }
         else {
-          console.log("paso por donde no debia")
+          // console.log("paso por donde no debia")
           this.setState((state) => ({
             player1: {
               ...state.player1,
@@ -226,7 +225,7 @@ export default class Field extends Component {
   }
 
   componentDidMount() {
-    console.log(this.state);
+    // console.log(this.state);
   }
   render = () => (
     <div className="Field" name="asd">
