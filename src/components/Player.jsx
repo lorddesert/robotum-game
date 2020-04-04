@@ -3,7 +3,7 @@ import player1Img from '../styles/images/cara.png';
 import player2Img from '../styles/images/gnaro.png';
 
 const Player = props => {
-  console.log("props:", props);
+  // console.log("props:", props);
   let img = null;
   if(props.name == "Nitsuga")
     img = player1Img;

@@ -34,7 +34,7 @@ export default class Game extends Component {
       player2: {...players[0]}
     }));
 
-    console.log(this.state);
+    // console.log(this.state);
   }
 
   changeToCredits = () => {
@@ -49,7 +49,7 @@ export default class Game extends Component {
       // try introduce settimeout here.
       audio.play();
       this.setState(() => ({playerSelect: false}));
-      console.log(this.state);
+      // console.log(this.state);
     }
     else if(e.target.innerText === "Start")
       this.setState({playerSelect: true, menu: false});

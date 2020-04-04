@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Action from './Action';
 import Message from './Message';
-import players from '../players/players.json';
 // import Actions from '../scripts/
 // import the list of movements
 class ActionBar extends Component {
@@ -13,7 +12,6 @@ class ActionBar extends Component {
   
   showList = ' ';
 
-  //It woorks
   toggleShow = e => {
     e.persist();
     e.preventDefault()
@@ -21,9 +19,9 @@ class ActionBar extends Component {
       if(e.target.innerText == 'Ataques' || e.target.innerText == 'Especiales') {
         this.showList = e.target.innerText;
       }
-      this.setState((state) => ({
+      this.setState( state => ({
         toggleShowOptions: !state.toggleShowOptions
-      }))
+      }));
     }
   }
 

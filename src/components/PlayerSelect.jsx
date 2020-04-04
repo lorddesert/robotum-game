@@ -7,13 +7,13 @@ import nitsuga from '../../src/styles/images/player-select-nitsuga.jpg';
 class PlayerSelect extends Component {
 
   handleClick = e => {
-    console.log(e.target.innerText);
+    // console.log(e.target.innerText);
     const nitsugaImg = document.getElementById('nitsugaImg');
     const gnaroImg = document.getElementById('gnaroImg');
     const btn = document.getElementsByClassName('btn');
 
     if(e.target.innerText == 'Nitsuga') {
-      console.log(e.target.innerText, btn)
+      // console.log(e.target.innerText, btn)
       nitsugaImg.style.opacity = '1'
       gnaroImg.style.opacity = '0';
       btn[0].style.color = 'red';
@@ -24,7 +24,7 @@ class PlayerSelect extends Component {
       this.props.onClick(e);
     }
     else if(e.target.innerText == 'Gnaro') {
-      console.log(e.target.innerText)
+      // console.log(e.target.innerText)
       gnaroImg.style.opacity = '1';
       nitsugaImg.style.opacity = '0'
       btn[0].style.color = 'white';
