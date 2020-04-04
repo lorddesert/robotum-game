@@ -1,6 +1,6 @@
 {
   "name": "robotum-game",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "An attempt for make a real game.",
   "main": "index.js",
   "scripts": {
